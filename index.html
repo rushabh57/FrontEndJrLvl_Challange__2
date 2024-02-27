@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+
+
+</head>
+
+<body>
+  <div class="alertContainer">
+    <div class="alert">
+      <img src="./assets/images/icon-list.svg" alt="">
+      <h1>Thanks for subscribing!</h1>
+      <p>A confirmation email has been sent to <b id="subscriberEmail"></b>. Please open it and click the button
+        inside to confirm your subscription.</p>
+      <button onclick="dismissMessage()">Dismiss message</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="form-container">
+      <h2 class="main-heading">Stay updated!</h2>
+      <p class="sub-heading"> Join 60,000+ product managers receiving monthly updates on:</p>
+      <div class="list">
+        <img src="./assets/images/icon-list.svg" alt="">
+        <p>Product discovery and building what matters</p>
+      </div>
+      <div class="list">
+        <img src="./assets/images/icon-list.svg" alt="">
+        <p>Measuring to ensure updates are a success</p>
+      </div>
+      <div class="list">
+        <img src="./assets/images/icon-list.svg" alt="">
+        <p>And much more!</p>
+      </div>
+      <div class="form">
+        <p>Email address</p>
+        <p class="ivalidPOP">Valid email required</p>
+        <label for="mail">
+          <input type="text" name="mail" id="mail" placeholder="email@company.com" />
+        </label>
+        <button type="button" onclick="verifyEmail()">Subscribe to monthly newsletter</button>
+      </div>
+    </div>
+    <div class="side-image">
+      <img src="/assets/images/illustration-sign-up-desktop.svg" alt="">
+    </div>
+
+  </div>
+
+
+  <script>
+    function verifyEmail() {
+      // Get the email input field
+      const emailInput = document.getElementById("mail");
+      const valPop = document.querySelector('.ivalidPOP');
+
+      // Regular expression for validating email format
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Check if the entered email matches the pattern
+      if (!emailPattern.test(emailInput.value)) {
+        // You can proceed with your subscription process here
+        invalidMail()
+        valPop.style.display = 'block';
+      } else {
+        successMsg(emailInput.value);
+        valPop.style.display = 'none';
+      }
+    }
+    function invalidMail() {
+      const mail = document.getElementById('mail');
+      mail.classList.add('invalid');
+    }
+    function successMsg(email) {
+      const subscriberEmail = document.getElementById('subscriberEmail');
+      subscriberEmail.textContent = email;
+      document.querySelector('.alertContainer').style.display = 'block';
+    }
+
+    function dismissMessage() {
+      document.querySelector('.alertContainer').style.display = 'none';
+    }
+  </script>
+
+
+</body>
+
+</html>
